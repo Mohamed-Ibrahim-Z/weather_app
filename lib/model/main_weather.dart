@@ -1,6 +1,6 @@
 class MainWeather{
-  double? temp, feels_like, temp_min, temp_max;
-  int? pressure, humidity;
+  double?  feels_like;
+  int? pressure, humidity,temp,temp_min, temp_max;
 
   MainWeather({
     this.temp,
@@ -13,10 +13,10 @@ class MainWeather{
 
   factory MainWeather.fromJson(Map<String, dynamic> json) {
     return MainWeather(
-      temp: json["temp"],
+      temp: (json["temp"] - 273.15).toInt(),
       feels_like: json["feels_like"],
-      temp_min: json["temp_min"],
-      temp_max: json["temp_max"],
+      temp_min: (json["temp_min"] - 273.15).toInt(),
+      temp_max: (json["temp_max"] - 273.15).toInt(),
       pressure: json["pressure"],
       humidity: json["humidity"],
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/homeScreen/home_view.dart';
+
+import '../view/home_view.dart';
 class AppRoot extends StatelessWidget {
   const AppRoot({Key? key}) : super(key: key);
 

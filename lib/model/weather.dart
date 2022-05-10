@@ -6,11 +6,24 @@ class Weather{
 
   Weather({this.id, this.main, this.description, this.icon});
   factory Weather.fromJson(Map<String, dynamic> json) {
+    print(json);
+    String icon = 'icon';
+
+    if(json['main'] == 'Clouds')
+      icon = 'assets/sunny_2d.png';
+    else if(json['main'] == 'Rain')
+      icon = 'assets/rainy.png';
+    else if(json['main'] == 'Snow')
+      icon = 'assets/snow.png';
+    else if(json['main'] == 'Thunderstorm')
+      icon = 'assets/thunder.png';
+    else
+      icon = 'assets/sunny.png';
     return Weather(
       id: json["id"],
       main: json["main"],
       description: json["description"],
-      icon: json["icon"],
+      icon: icon,
     );
   }
 

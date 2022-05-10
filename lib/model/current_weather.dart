@@ -13,12 +13,13 @@ class CurrentWeather {
   int? visibility;
   Wind? wind;
   Clouds? clouds;
-  int? dt;
+  DateTime? dt;
   Sys? sys;
   int? timezone;
   int? id;
   String? name;
   int? cod;
+  String? icon;
 
   CurrentWeather(
       {
@@ -34,10 +35,23 @@ class CurrentWeather {
       this.timezone,
       this.id,
       this.name,
-      this.cod
+      this.cod,
+      this.icon,
       });
 
   factory CurrentWeather.fromJson(Map<String, dynamic> json) {
+    String icon = json['weather'][0]['icon'];
+
+    if(json['weather'][0]['main'] == 'Clouds')
+      icon = 'assets/sunny_2d.png';
+    else if(json['weather'][0]['main'] == 'Rain')
+      icon = 'assets/rainy.png';
+    else if(json['weather'][0]['main'] == 'Snow')
+      icon = 'assets/snow.png';
+    else if(json['weather'][0]['main'] == 'Thunderstorm')
+      icon = 'assets/thunder.png';
+    else
+      icon = 'assets/sunny.png';
     return CurrentWeather(
       coord: Coord.fromJson(json["coord"]),
       weather: List<Weather>.from(json["weather"].map((x) => Weather.fromJson(x))),
@@ -46,12 +60,13 @@ class CurrentWeather {
       visibility: json["visibility"],
       wind: Wind.fromJson(json["wind"]),
       clouds: Clouds.fromJson(json["clouds"]),
-      dt: json["dt"],
+      dt: DateTime.fromMillisecondsSinceEpoch(json["dt"] * 1000),
       sys: Sys.fromJson(json["sys"]),
       timezone: json["timezone"],
       id: json["id"],
       name: json["name"],
       cod:json["cod"],
+      icon: icon,
     );
   }
 
