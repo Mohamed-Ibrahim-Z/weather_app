@@ -1,12 +1,12 @@
 class Clouds
 {
-  double? all;
+  int? all;
 
   Clouds({this.all});
 
   factory Clouds.fromJson(Map<String, dynamic> json) {
     return Clouds(
-      all: double.parse(json["all"]),
+      all: json["all"],
     );
   }
 

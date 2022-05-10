@@ -5,10 +5,9 @@ class Weather{
   String? icon;
 
   Weather({this.id, this.main, this.description, this.icon});
-
   factory Weather.fromJson(Map<String, dynamic> json) {
     return Weather(
-      id: int.parse(json["id"]),
+      id: json["id"],
       main: json["main"],
       description: json["description"],
       icon: json["icon"],

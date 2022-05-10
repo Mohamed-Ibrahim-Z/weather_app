@@ -3,6 +3,7 @@ import 'package:weather_app/model/coord.dart';
 import 'package:weather_app/model/main_weather.dart';
 import 'package:weather_app/model/sys.dart';
 import 'package:weather_app/model/weather.dart';
+import 'package:weather_app/model/wind.dart';
 
 class CurrentWeather {
   Coord? coord;
@@ -10,6 +11,7 @@ class CurrentWeather {
   String? base;
   MainWeather? mainWeather;
   int? visibility;
+  Wind? wind;
   Clouds? clouds;
   int? dt;
   Sys? sys;
@@ -19,37 +21,39 @@ class CurrentWeather {
   int? cod;
 
   CurrentWeather(
-      {this.coord,
+      {
+      this.coord,
       this.weather,
       this.base,
       this.mainWeather,
       this.visibility,
+      this.wind,
       this.clouds,
       this.dt,
       this.sys,
       this.timezone,
       this.id,
       this.name,
-      this.cod});
+      this.cod
+      });
 
   factory CurrentWeather.fromJson(Map<String, dynamic> json) {
     return CurrentWeather(
       coord: Coord.fromJson(json["coord"]),
-      weather: List.of(json["weather"]).map((i) => i ).toList() != null
-          ? List.of(json["weather"]).map((i) => Weather.fromJson(i)).toList()
-          : null,
+      weather: List<Weather>.from(json["weather"].map((x) => Weather.fromJson(x))),
       base: json["base"],
-      mainWeather: MainWeather.fromJson(json["mainWeather"]),
-      visibility: int.parse(json["visibility"]),
+      mainWeather: MainWeather.fromJson(json["main"]),
+      visibility: json["visibility"],
+      wind: Wind.fromJson(json["wind"]),
       clouds: Clouds.fromJson(json["clouds"]),
-      dt: int.parse(json["dt"]),
+      dt: json["dt"],
       sys: Sys.fromJson(json["sys"]),
-      timezone: int.parse(json["timezone"]),
-      id: int.parse(json["id"]),
+      timezone: json["timezone"],
+      id: json["id"],
       name: json["name"],
-      cod: int.parse(json["cod"]),
+      cod:json["cod"],
     );
   }
-//
+
 
 }

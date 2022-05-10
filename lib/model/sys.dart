@@ -1,5 +1,5 @@
 class Sys{
-  double? type;
+  int? type;
   int? id;
   String? country;
   int? sunrise;
@@ -9,11 +9,11 @@ class Sys{
 
   factory Sys.fromJson(Map<String, dynamic> json) {
     return Sys(
-      type: double.parse(json["type"]),
-      id: int.parse(json["id"]),
+      type: json["type"],
+      id: json["id"],
       country: json["country"],
-      sunrise: int.parse(json["sunrise"]),
-      sunset: int.parse(json["sunset"]),
+      sunrise: json["sunrise"],
+      sunset: json["sunset"],
     );
   }
 
